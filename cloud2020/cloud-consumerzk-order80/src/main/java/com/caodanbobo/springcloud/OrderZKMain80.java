@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  **/
 @SpringBootApplication
 @EnableDiscoveryClient
-public class OrderMain80 {
+public class OrderZKMain80 {
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate() {
@@ -24,6 +24,6 @@ public class OrderMain80 {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderMain80.class, args);
+        SpringApplication.run(OrderZKMain80.class, args);
     }
 }

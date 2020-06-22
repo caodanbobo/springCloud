@@ -19,21 +19,21 @@ import org.springframework.web.client.RestTemplate;
  **/
 @RestController
 @Slf4j
-public class OrderZKController {
+public class OrderController {
 
-//    public static final String PAYMENT_URL="http://localhost:8001";
-    public static final String PAYMENT_URL="http://cloud-payment-service";
+    //    public static final String PAYMENT_URL="http://localhost:8001";
+    public static final String PAYMENT_URL = "http://consul-provider-payment";
 
     @Autowired
     private RestTemplate template;
 
     @PostMapping("/consumer/payments")
-    public CommonResult<Payment> create(Payment payment){
-        return template.postForObject(PAYMENT_URL+"/payments",payment,CommonResult.class);
+    public CommonResult<Payment> create(Payment payment) {
+        return template.postForObject(PAYMENT_URL + "/payments", payment, CommonResult.class);
     }
 
     @GetMapping("/consumer/payments/{id}")
-    public CommonResult<Payment> getPayment(@PathVariable("id") String id){
-        return template.getForObject(PAYMENT_URL+"/payments/"+id,CommonResult.class);
+    public CommonResult<Payment> getPayment(@PathVariable("id") String id) {
+        return template.getForObject(PAYMENT_URL + "/payments/" + id, CommonResult.class);
     }
 }
