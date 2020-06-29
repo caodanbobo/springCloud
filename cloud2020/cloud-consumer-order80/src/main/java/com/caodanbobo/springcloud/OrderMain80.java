@@ -3,7 +3,6 @@ package com.caodanbobo.springcloud;
 import com.ribbinRule.RibbonConf;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @RibbonClient(name = "CLOUD-PAYMENT-SERVICE", configuration = RibbonConf.class)
 public class OrderMain80 {
     @Bean
-    @LoadBalanced
+    //@LoadBalanced 使用ribbion
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
