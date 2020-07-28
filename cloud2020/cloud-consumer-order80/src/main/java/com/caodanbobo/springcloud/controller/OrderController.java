@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,16 @@ public class OrderController {
     @GetMapping("/consumer/payments/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") String id) {
         return template.getForObject(PAYMENT_URL + "/payments/" + id, CommonResult.class);
+    }
+
+    @GetMapping("/consumer/payments/getEntity/{id}")
+    public CommonResult<Payment> getPayment2(@PathVariable("id") String id){
+        ResponseEntity<CommonResult> entity=template.getForEntity(PAYMENT_URL + "/payments/" + id, CommonResult.class);
+        if(entity.getStatusCode().is2xxSuccessful()){
+            return entity.getBody();
+        }else{
+            return new CommonResult<>(444,"操作失败");
+        }
     }
 
     @GetMapping(value = "/consumer/payment/lb")
